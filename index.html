@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>سامانه آموزشی درس‌نامه نقد احمدالحسن بصری</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green-950:#0b2e23; --green-900:#0f3d2e; --green-800:#14532d; --green-700:#166534;
+  --green-100:#dcfce7; --green-50:#f0fdf4;
+  --gold-600:#a88420; --gold-500:#c9a227; --gold-400:#d4af37; --gold-100:#faf3dd;
+  --cream:#faf8f1; --card:#ffffff; --ink:#1e293b; --muted:#64748b; --line:#e7e0d0;
+  --red:#dc2626; --red-bg:#fef2f2; --amber:#d97706;
+  --radius:14px; --shadow:0 2px 12px rgba(15,61,46,.08);
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;}
+body{margin:0; font-family:'Vazirmatn',Tahoma,sans-serif; background:var(--cream); color:var(--ink); line-height:2; font-size:15px;}
+a{color:var(--green-800);}
+button{font-family:inherit; cursor:pointer;}
+input,textarea,select{font-family:inherit; font-size:15px;}
+.wrap{max-width:760px; margin:0 auto; padding:0 14px 90px;}
+
+/* ---------- header ---------- */
+.topbar{position:sticky; top:0; z-index:50; background:linear-gradient(135deg,var(--green-950),var(--green-800)); color:#fff; box-shadow:0 2px 10px rgba(0,0,0,.2);}
+.topbar .inner{max-width:760px; margin:0 auto; padding:10px 14px; display:flex; align-items:center; gap:10px;}
+.topbar .logo{width:40px; height:40px; border-radius:12px; background:var(--gold-400); color:var(--green-950); display:flex; align-items:center; justify-content:center; font-weight:900; font-size:20px; flex-shrink:0;}
+.topbar .ttl{flex:1; min-width:0;}
+.topbar .ttl b{display:block; font-size:14px; line-height:1.7; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+.topbar .ttl span{font-size:11px; opacity:.75;}
+.role-badge{font-size:11px; background:rgba(255,255,255,.15); border:1px solid rgba(255,255,255,.3); padding:2px 10px; border-radius:20px; white-space:nowrap;}
+.icon-btn{background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.25); color:#fff; border-radius:10px; padding:6px 10px; font-size:13px;}
+
+/* ---------- bottom nav ---------- */
+.bottomnav{position:fixed; bottom:0; left:0; right:0; z-index:50; background:#fff; border-top:1px solid var(--line); box-shadow:0 -2px 12px rgba(0,0,0,.06);}
+.bottomnav .inner{max-width:760px; margin:0 auto; display:flex; padding:6px 4px calc(6px + env(safe-area-inset-bottom));}
+.navitem{flex:1; text-align:center; text-decoration:none; color:var(--muted); font-size:11px; padding:6px 2px; border-radius:10px; line-height:1.6;}
+.navitem .ic{font-size:20px; display:block; line-height:1.4;}
+.navitem.active{color:var(--green-800); font-weight:700; background:var(--green-50);}
+
+/* ---------- generic ---------- */
+.page{animation:fade .25s ease;}
+@keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
+h2.ptitle{font-size:19px; color:var(--green-900); margin:18px 0 12px; display:flex; align-items:center; gap:8px;}
+h2.ptitle::before{content:''; width:5px; height:22px; background:var(--gold-500); border-radius:3px;}
+.card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); padding:16px; margin-bottom:12px;}
+.btn{display:inline-block; border:none; border-radius:12px; padding:11px 22px; font-size:15px; font-weight:700; text-decoration:none; text-align:center; transition:.15s;}
+.btn-green{background:var(--green-800); color:#fff;}
+.btn-green:active{transform:scale(.97);}
+.btn-gold{background:var(--gold-400); color:var(--green-950);}
+.btn-outline{background:#fff; color:var(--green-800); border:2px solid var(--green-800);}
+.btn-block{display:block; width:100%;}
+.btn-sm{padding:7px 14px; font-size:13px;}
+.btn[disabled]{opacity:.5;}
+.field{margin-bottom:12px;}
+.field label{display:block; font-size:13px; font-weight:700; color:var(--green-900); margin-bottom:5px;}
+.field input,.field textarea,.field select{width:100%; border:1.5px solid var(--line); border-radius:10px; padding:10px 12px; background:#fff; outline:none;}
+.field input:focus,.field textarea:focus{border-color:var(--green-700); box-shadow:0 0 0 3px var(--green-100);}
+.hint{font-size:12px; color:var(--muted); line-height:1.9;}
+.alert{border-radius:12px; padding:12px 14px; font-size:13px; margin-bottom:12px; line-height:1.9;}
+.alert-warn{background:#fffbeb; border:1px solid #fde68a; color:#92400e;}
+.alert-ok{background:var(--green-50); border:1px solid #bbf7d0; color:var(--green-800);}
+.alert-err{background:var(--red-bg); border:1px solid #fecaca; color:#991b1b;}
+.tabs{display:flex; background:#fff; border:1px solid var(--line); border-radius:12px; overflow:hidden; margin-bottom:16px;}
+.tabs button{flex:1; border:none; background:none; padding:11px; font-size:14px; font-weight:700; color:var(--muted);}
+.tabs button.active{background:var(--green-800); color:#fff;}
+.pbar{height:9px; background:#eee9db; border-radius:6px; overflow:hidden;}
+.pbar > i{display:block; height:100%; background:linear-gradient(90deg,var(--gold-500),var(--gold-400)); border-radius:6px; transition:width .4s;}
+.pbar.green > i{background:linear-gradient(90deg,var(--green-700),var(--green-800));}
+.ring{position:relative; width:120px; height:120px; margin:0 auto;}
+.ring svg{transform:rotate(-90deg);}
+.ring .pct{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:900; color:var(--green-900);}
+.stat-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-bottom:12px;}
+.stat{background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:12px; text-align:center; box-shadow:var(--shadow);}
+.stat b{display:block; font-size:22px; color:var(--green-900); line-height:1.6;}
+.stat span{font-size:12px; color:var(--muted);}
+.empty{text-align:center; color:var(--muted); padding:30px 10px; font-size:14px;}
+.empty .big{font-size:40px; display:block; margin-bottom:8px;}
+</style>
+<style>
+/* ---------- chapter list ---------- */
+.ch-item{display:flex; gap:12px; align-items:center; background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:13px 14px; margin-bottom:10px; text-decoration:none; color:inherit; box-shadow:var(--shadow);}
+.ch-item:active{transform:scale(.99);}
+.ch-num{width:44px; height:44px; flex-shrink:0; border-radius:12px; background:linear-gradient(135deg,var(--green-800),var(--green-950)); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:16px;}
+.ch-num.done{background:linear-gradient(135deg,var(--gold-500),var(--gold-600));}
+.ch-body{flex:1; min-width:0;}
+.ch-body b{display:block; font-size:14px; color:var(--green-950); line-height:1.8;}
+.ch-body small{color:var(--muted); font-size:12px;}
+.ch-meta{text-align:left; font-size:11px; color:var(--muted); min-width:64px;}
+.ch-meta .pbar{margin-top:6px; width:64px;}
+
+/* ---------- reader ---------- */
+.reader{background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:20px 18px; box-shadow:var(--shadow); margin-bottom:12px;}
+.reader h3.sec{color:var(--green-900); font-size:16px; border-bottom:2px solid var(--gold-100); padding-bottom:6px; margin:22px 0 10px;}
+.reader h3.sec:first-child{margin-top:0;}
+.reader h4.sub4{color:var(--gold-600); font-size:15px; margin:18px 0 8px;}
+.reader p{margin:0 0 12px; text-align:justify;}
+.reader .nnum{color:var(--gold-600); font-weight:800;}
+.reader .bullets{margin:8px 0;}
+.lesson-nav{display:flex; gap:10px; margin:14px 0;}
+.lesson-nav .btn{flex:1;}
+.read-toggle{display:flex; align-items:center; gap:10px; background:var(--green-50); border:1.5px dashed var(--green-700); border-radius:12px; padding:10px 14px; margin:14px 0; font-size:14px; font-weight:700; color:var(--green-800); width:100%; justify-content:center;}
+.read-toggle.is-done{background:var(--green-800); color:#fff; border-style:solid;}
+
+/* ---------- quiz ---------- */
+.q-card{background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:14px; margin-bottom:12px; box-shadow:var(--shadow);}
+.q-card .q-text{font-weight:700; color:var(--green-950); margin-bottom:10px; font-size:14px; line-height:1.9;}
+.rate-row{display:flex; gap:8px; margin-bottom:10px;}
+.rate{flex:1; border:1.5px solid var(--line); background:#fff; border-radius:10px; padding:8px 4px; font-size:12.5px; font-weight:700; color:var(--muted);}
+.rate.sel-2{background:var(--green-800); border-color:var(--green-800); color:#fff;}
+.rate.sel-1{background:#fef3c7; border-color:var(--amber); color:#92400e;}
+.rate.sel-0{background:var(--red-bg); border-color:var(--red); color:#991b1b;}
+.q-card textarea{width:100%; border:1.5px solid var(--line); border-radius:10px; padding:9px 11px; min-height:70px; font-size:13.5px; resize:vertical;}
+.q-card textarea:focus{border-color:var(--green-700); outline:none;}
+
+/* ---------- teacher ---------- */
+.tbl{width:100%; border-collapse:collapse; font-size:13px; background:#fff; border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow);}
+.tbl th{background:var(--green-900); color:#fff; padding:10px 8px; font-size:12px;}
+.tbl td{padding:10px 8px; border-bottom:1px solid var(--line); text-align:center;}
+.tbl tr:last-child td{border-bottom:none;}
+.tbl tr:active td{background:var(--green-50);}
+.st-row{display:flex; align-items:center; gap:10px; background:#fff; border:1px solid var(--line); border-radius:12px; padding:11px 13px; margin-bottom:8px; text-decoration:none; color:inherit;}
+.st-avatar{width:38px; height:38px; border-radius:50%; background:var(--green-100); color:var(--green-800); font-weight:900; display:flex; align-items:center; justify-content:center; flex-shrink:0;}
+.st-row .nm{flex:1; min-width:0;} .st-row .nm b{display:block; font-size:14px; line-height:1.7;} .st-row .nm small{color:var(--muted); font-size:11px;}
+.ans-item{background:#fff; border:1px solid var(--line); border-radius:12px; padding:13px; margin-bottom:10px;}
+.ans-item .qq{font-size:12.5px; color:var(--muted); margin-bottom:6px;}
+.ans-item .aa{font-size:14px; background:var(--cream); border-radius:8px; padding:8px 10px; margin-top:6px;}
+.pill{display:inline-block; font-size:11px; font-weight:700; border-radius:20px; padding:2px 10px;}
+.pill-ok{background:var(--green-100); color:var(--green-800);}
+.pill-warn{background:#fef3c7; color:#92400e;}
+.pill-bad{background:var(--red-bg); color:#991b1b;}
+.setup-steps{counter-reset:st;}
+.setup-steps li{margin-bottom:10px; font-size:13.5px; line-height:2;}
+code.url{direction:ltr; display:block; background:#1e293b; color:#a5f3fc; border-radius:8px; padding:8px 10px; font-size:11px; overflow-x:auto; margin:6px 0; text-align:left;}
+details.help{margin-top:14px;}
+details.help summary{cursor:pointer; font-weight:700; color:var(--green-800); font-size:14px;}
+@media (max-width:480px){
+  body{font-size:14px;}
+  .stat-grid{grid-template-columns:repeat(2,1fr);}
+  .tbl{font-size:12px;} .tbl th,.tbl td{padding:8px 5px;}
+}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="inner">
+  <div class="logo">ن</div>
+  <div class="ttl"><b>سامانه آموزشی درس‌نامه نقد احمدالحسن بصری</b><span id="topsub">رابط استاد و شاگرد</span></div>
+  <span class="role-badge" id="roleBadge" style="display:none"></span>
+  <button class="icon-btn" id="logoutBtn" style="display:none" onclick="logout()">خروج</button>
+</div></div>
+<div class="wrap"><div id="app" class="page"></div></div>
+<nav class="bottomnav" id="bottomnav" style="display:none"><div class="inner" id="navInner"></div></nav>
+<script>
+
+'use strict';
+/* ================= utils ================= */
+const $ = s => document.querySelector(s);
+const esc = s => String(s==null?'':s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const FA_D = '۰۱۲۳۴۵۶۷۸۹';
+const fa = n => String(n).replace(/\d/g, d=>FA_D[d]);
+const todayStr = () => { const d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); };
+const fmtDate = ts => { try{ const d=new Date(ts); return fa(d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate())+' ـ '+fa(String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')); }catch(e){ return ''; } };
+const go = h => { location.hash = h; };
+
+/* ================= storage ================= */
+const store = {
+  get(k, d){ try{ const v = localStorage.getItem('lms_'+k); return v==null?d:JSON.parse(v); }catch(e){ return d; } },
+  set(k, v){ try{ localStorage.setItem('lms_'+k, JSON.stringify(v)); }catch(e){} },
+  del(k){ localStorage.removeItem('lms_'+k); }
+};
+const settings = () => Object.assign({appsScriptUrl:'', classCode:'QAEM1404', teacherPass:'1234'}, store.get('settings',{}));
+const saveSettings = s => store.set('settings', s);
+const session = () => store.get('session', null);
+
+/* ================= content helpers ================= */
+let CH_META = [];
+let TOTAL_LESSONS = 0;
+const chById = id => CH_META.find(c=>c.id===id);
+const chCache = {};
+function getChData(id){
+  if(chCache[id]) return Promise.resolve(chCache[id]);
+  return fetch('content/chapters/'+id+'.json').then(r=>{ if(!r.ok) throw new Error('nf'); return r.json(); }).then(d=>{ chCache[id]=d; return d; });
+}
+
+/* ================= progress (student, local) ================= */
+const prog = {
+  all(){ return store.get('progress', {}); },
+  is(chId, li){ return !!this.all()[chId+':'+li]; },
+  set(chId, li, done){ const p=this.all(); const k=chId+':'+li; if(done) p[k]=1; else delete p[k]; store.set('progress',p); markDay(); queue({action:'progress', chapterId:chId, lessonIdx:li, done:!!done}); },
+  chDone(chId){ const c=chById(chId); if(!c) return 0; let n=0; for(let i=0;i<c.lessonCount;i++){ if(this.is(chId,i)) n++; } return n; },
+  total(){ return Object.keys(this.all()).length; },
+  overallPct(){ return TOTAL_LESSONS? Math.round(this.total()/TOTAL_LESSONS*100):0; }
+};
+const quizStore = {
+  all(){ return store.get('quiz', {}); },
+  get(chId){ return this.all()[chId]||null; },
+  set(chId, answers){ const q=this.all(); q[chId]={answers, ts:Date.now()}; store.set('quiz',q); markDay(); queue({action:'quiz', chapterId:chId, answers}); },
+  mastery(){ // avg of ratings
+    const q=this.all(); let s=0,n=0;
+    Object.values(q).forEach(r=>r.answers.forEach(a=>{ if(a.rating!==''&&a.rating!=null){ s+=+a.rating; n++; } }));
+    return n? Math.round(s/n/2*100):0;
+  }
+};
+function markDay(){ const d=store.get('days',[]); const t=todayStr(); if(!d.includes(t)){ d.push(t); store.set('days',d.slice(-60)); } }
+function streak(){ const d=new Set(store.get('days',[])); let n=0; const dt=new Date();
+  if(!d.has(todayStr())) dt.setDate(dt.getDate()-1);
+  while(true){ const s=dt.getFullYear()+'-'+String(dt.getMonth()+1).padStart(2,'0')+'-'+String(dt.getDate()).padStart(2,'0');
+    if(d.has(s)){ n++; dt.setDate(dt.getDate()-1); } else break; }
+  return n; }
+
+/* ================= sync engine ================= */
+function queue(item){
+  const s = session(); const cfg = settings();
+  const payload = Object.assign({ts:Date.now()}, item);
+  if(s && s.role==='student'){ payload.studentId=s.studentId; payload.name=s.name; }
+  if(!cfg.appsScriptUrl){ const q=store.get('queue',[]); q.push(payload); store.set('queue',q); return; }
+  sendPayload(cfg.appsScriptUrl, payload).catch(()=>{ const q=store.get('queue',[]); q.push(payload); store.set('queue',q); });
+}
+function sendPayload(url, payload){
+  return fetch(url,{method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body:JSON.stringify(payload)})
+    .then(r=>r.json()).then(j=>{ if(!j.ok) throw new Error(j.error||'sync'); return j; });
+}
+function flushQueue(){
+  const cfg=settings(); if(!cfg.appsScriptUrl) return;
+  let q=store.get('queue',[]); if(!q.length) return;
+  const item=q[0];
+  sendPayload(cfg.appsScriptUrl,item).then(()=>{ q=store.get('queue',[]); q.shift(); store.set('queue',q); if(q.length) flushQueue(); updateSyncBadge(); }).catch(()=>{});
+}
+function apiGet(params){
+  const cfg=settings();
+  return fetch(cfg.appsScriptUrl+'?'+new URLSearchParams(params)).then(r=>r.json());
+}
+window.addEventListener('online', flushQueue);
+setInterval(flushQueue, 30000);
+function updateSyncBadge(){
+  const q=store.get('queue',[]); const el=$('#syncBadge');
+  if(el) el.style.display = q.length? 'inline-block':'none';
+}
+</script>
+<script>
+
+'use strict';
+/* ================= auth ================= */
+function logout(){ store.del('session'); go('#/login'); }
+function requireRole(role){
+  const s=session();
+  if(!s || s.role!==role){ go('#/login'); return null; }
+  return s;
+}
+function setNav(items){
+  const nav=$('#bottomnav'), inner=$('#navInner');
+  if(!items){ nav.style.display='none'; return; }
+  nav.style.display='block';
+  const cur=location.hash;
+  inner.innerHTML=items.map(i=>`<a class="navitem ${cur.startsWith(i.h)?'active':''}" href="${i.h}"><span class="ic">${i.ic}</span>${i.t}</a>`).join('');
+}
+function setRoleBadge(txt){ const b=$('#roleBadge'); if(txt){ b.style.display='inline-block'; b.textContent=txt; $('#logoutBtn').style.display='inline-block'; } else { b.style.display='none'; $('#logoutBtn').style.display='none'; } }
+
+const STUDENT_NAV=[
+  {h:'#/home',t:'خانه',ic:'🏠'},{h:'#/chapters',t:'فصل‌ها',ic:'📚'},
+  {h:'#/sdash',t:'داشبورد',ic:'📊'},{h:'#/ask',t:'پرسش',ic:'💬'},{h:'#/announce',t:'اطلاعیه',ic:'📢'}
+];
+const TEACHER_NAV=[
+  {h:'#/tdash',t:'داشبورد',ic:'📊'},{h:'#/tquestions',t:'پرسش‌ها',ic:'💬'},
+  {h:'#/chapters',t:'فصل‌ها',ic:'📚'},{h:'#/settings',t:'تنظیمات',ic:'⚙️'}
+];
+
+function vLogin(){
+  setNav(null); setRoleBadge(null);
+  $('#topsub').textContent='ورود به سامانه';
+  $('#app').innerHTML=`
+  <div class="card" style="text-align:center; background:linear-gradient(135deg,var(--green-900),var(--green-950)); color:#fff; border:none;">
+    <div style="font-size:44px;">📖</div>
+    <b style="font-size:17px;">سامانه آموزشی درس‌نامه</b><br>
+    <span style="font-size:13px; opacity:.85;">نقد احمدالحسن بصری — رابط استاد و شاگرد</span>
+    <div style="font-size:12px; opacity:.7; margin-top:6px;">${fa(CH_META.length)} فصل • ${fa(TOTAL_LESSONS)} درس • ${fa(CH_META.reduce((a,c)=>a+c.questionCount,0))} پرسش خودآزمایی</div>
+  </div>
+  <div class="tabs"><button id="tabS" class="active" onclick="loginTab('s')">👨‍🎓 ورود شاگرد</button><button id="tabT" onclick="loginTab('t')">👨‍🏫 ورود استاد</button></div>
+  <div class="card" id="paneS">
+    <div class="field"><label>نام و تخلص</label><input id="sName" placeholder="مثلاً: احمد محمدی"></div>
+    <div class="field"><label>کد کلاس</label><input id="sCode" placeholder="کد کلاس را از استاد بگیرید"></div>
+    <button class="btn btn-green btn-block" onclick="doStudentLogin()">ورود به کلاس</button>
+    <p class="hint" style="margin-top:10px;">📶 بدون اینترنت هم می‌توانید بخوانید؛ با اتصال به اینترنت، پیشرفت شما برای استاد ثبت می‌شود.</p>
+  </div>
+  <div class="card" id="paneT" style="display:none">
+    <div class="field"><label>گذرواژه استاد</label><input id="tPass" type="password" placeholder="گذرواژه"></div>
+    <button class="btn btn-gold btn-block" onclick="doTeacherLogin()">ورود به داشبورد</button>
+    <details class="help"><summary>🛠 راه‌اندازی برای استاد (اولین بار)</summary>
+      <ol class="setup-steps">
+        <li>از فایل راهنما، کد Apps Script را در گوگل‌شیت خود نصب کنید.</li>
+        <li>وب‌اپ را Deploy کنید و آدرس <code>/exec</code> را کپی کنید.</li>
+        <li>وارد شوید (گذرواژه پیش‌فرض: <code>1234</code>) و در «تنظیمات» آدرس را وارد کنید.</li>
+      </ol>
+    </details>
+  </div>`;
+}
+function loginTab(w){
+  $('#tabS').classList.toggle('active',w==='s'); $('#tabT').classList.toggle('active',w==='t');
+  $('#paneS').style.display=w==='s'?'block':'none'; $('#paneT').style.display=w==='t'?'block':'none';
+}
+function doStudentLogin(){
+  const name=$('#sName').value.trim(), code=$('#sCode').value.trim();
+  if(!name){ alert('نام را بنویسید.'); return; }
+  if(!code){ alert('کد کلاس را بنویسید.'); return; }
+  const cfg=settings();
+  if(code!==cfg.classCode){ alert('کد کلاس درست نیست. از استاد بپرسید.'); return; }
+  let sid=store.get('studentId',null);
+  const done=(id)=>{ store.set('session',{role:'student',name,studentId:id}); store.set('studentId',id); go('#/home'); };
+  if(!cfg.appsScriptUrl){ if(!sid) sid='local-'+Date.now().toString(36); done(sid); return; }
+  sendPayload(cfg.appsScriptUrl,{action:'register',name,code}).then(j=>done(j.studentId)).catch(()=>{ if(!sid) sid='local-'+Date.now().toString(36); done(sid); });
+}
+function doTeacherLogin(){
+  const p=$('#tPass').value;
+  if(p===settings().teacherPass){ store.set('session',{role:'teacher'}); go('#/tdash'); }
+  else alert('گذرواژه درست نیست.');
+}
+
+/* ================= student: home ================= */
+async function vHome(){
+  const s=requireRole('student'); if(!s) return;
+  setNav(STUDENT_NAV); setRoleBadge('👨‍🎓 '+s.name);
+  $('#topsub').textContent='خانه شاگرد';
+  let next=null;
+  for(const c of CH_META){ for(let i=0;i<c.lessonCount;i++){ if(!prog.is(c.id,i)){ next={c,i}; break; } } if(next) break; }
+  let nextTitle='';
+  if(next){ try{ const d=await getChData(next.c.id); nextTitle=d.lessons[next.i].title; }catch(e){} }
+  const pct=prog.overallPct();
+  const R=52, C=2*Math.PI*R;
+  $('#app').innerHTML=`
+  <h2 class="ptitle">سلام ${esc(s.name)} 👋</h2>
+  <div class="card" style="text-align:center;">
+    <div class="ring"><svg width="120" height="120"><circle cx="60" cy="60" r="${R}" stroke="#eee9db" stroke-width="11" fill="none"/><circle cx="60" cy="60" r="${R}" stroke="var(--green-700)" stroke-width="11" fill="none" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${C*(1-pct/100)}"/></svg><div class="pct">${fa(pct)}٪</div></div>
+    <div style="font-size:13px; color:var(--muted); margin:8px 0 12px;">${fa(prog.total())} درس از ${fa(TOTAL_LESSONS)} درس خوانده شده</div>
+    ${next?`<a class="btn btn-green btn-block" href="#/read/${next.c.id}/${next.i}">▶ ادامه مطالعه: ${esc(next.c.label)} — ${esc(nextTitle.slice(0,40))}</a>`:`<div class="alert alert-ok">🎉 آفرین! همه درس‌ها را خوانده‌اید.</div>`}
+    <span id="syncBadge" class="pill pill-warn" style="display:none; margin-top:8px;">⏳ در انتظار همگام‌سازی</span>
+  </div>
+  <div class="stat-grid">
+    <div class="stat"><b>${fa(streak())}</b><span>🔥 روزهای متوالی مطالعه</span></div>
+    <div class="stat"><b>${fa(Object.keys(quizStore.all()).length)}</b><span>📝 خودآزمایی ثبت‌شده</span></div>
+    <div class="stat"><b>${fa(quizStore.mastery())}٪</b><span>🎯 درصد تسلط</span></div>
+    <div class="stat"><b>${fa(CH_META.filter(c=>c.lessonCount&&prog.chDone(c.id)===c.lessonCount).length)}</b><span>✅ فصل‌های تمام‌شده</span></div>
+  </div>`;
+  updateSyncBadge(); flushQueue();
+}
+
+/* ================= chapters & chapter & reader ================= */
+function vChapters(){
+  const s=session(); if(!s){ go('#/login'); return; }
+  setNav(s.role==='teacher'?TEACHER_NAV:STUDENT_NAV); setRoleBadge(s.role==='teacher'?'👨‍🏫 استاد':'👨‍🎓 '+s.name);
+  $('#topsub').textContent='فهرست فصل‌ها';
+  $('#app').innerHTML=`<h2 class="ptitle">فصل‌های درس‌نامه</h2>`+CH_META.map((c,idx)=>{
+    const d=prog.chDone(c.id), n=c.lessonCount, p=n?Math.round(d/n*100):0;
+    const link=s.role==='teacher'?`#/chapter/${c.id}`:`#/chapter/${c.id}`;
+    return `<a class="ch-item" href="${link}">
+      <div class="ch-num ${p===100?'done':''}">${p===100?'✓':fa(idx+1)}</div>
+      <div class="ch-body"><b>${esc(c.label)}: ${esc(c.title)}</b><small>${fa(n)} درس • ${fa(c.questionCount)} پرسش خودآزمایی</small></div>
+      <div class="ch-meta">${fa(p)}٪<div class="pbar"><i style="width:${p}%"></i></div></div>
+    </a>`;
+  }).join('');
+}
+async function vChapter(chId){
+  const s=session(); if(!s){ go('#/login'); return; }
+  const c=chById(chId); if(!c){ go('#/chapters'); return; }
+  setNav(s.role==='teacher'?TEACHER_NAV:STUDENT_NAV); setRoleBadge(s.role==='teacher'?'👨‍🏫 استاد':'👨‍🎓 '+s.name);
+  $('#topsub').textContent=c.label;
+  const dd=prog.chDone(chId), n=c.lessonCount, p=n?Math.round(dd/n*100):0;
+  const q=quizStore.get(chId);
+  let chd=null; try{ chd=await getChData(chId); }catch(e){ $('#app').innerHTML='<div class="alert alert-err">خطا در بارگذاری فصل.</div>'; return; }
+  const lessons=chd.lessons, summary_html=chd.summary_html, sources=chd.sources;
+  $('#app').innerHTML=`
+  <h2 class="ptitle">${esc(c.label)}</h2>
+  <div class="card">
+    <b style="color:var(--green-900); font-size:15px;">${esc(c.title)}</b>
+    ${c.subtitle?`<div class="hint">${esc(c.subtitle)}</div>`:''}
+    <div style="display:flex; align-items:center; gap:10px; margin-top:10px;"><div class="pbar green" style="flex:1;"><i style="width:${p}%"></i></div><b style="font-size:13px;">${fa(p)}٪</b></div>
+    <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">
+      ${c.questionCount?`<a class="btn btn-gold btn-sm" href="#/quiz/${chId}">📝 خودآزمایی فصل ${q?'(ثبت شده ✓)':''}</a>`:''}
+      ${summary_html?`<button class="btn btn-outline btn-sm" onclick="document.getElementById('sumBox').style.display=document.getElementById('sumBox').style.display==='none'?'block':'none'">📌 جمع‌بندی</button>`:''}
+    </div>
+    ${summary_html?`<div id="sumBox" class="reader" style="display:none; margin-top:12px; background:var(--gold-100);">${summary_html}</div>`:''}
+  </div>
+  ${lessons.map((l,i)=>`
+    <a class="ch-item" href="#/read/${chId}/${i}">
+      <div class="ch-num ${prog.is(chId,i)?'done':''}">${prog.is(chId,i)?'✓':fa(i+1)}</div>
+      <div class="ch-body"><b>${esc(l.label)}: ${esc(l.title)}</b></div>
+    </a>`).join('')}
+  ${sources.length?`<div class="card"><b style="font-size:13px;">📚 منابع این فصل</b>${sources.map(x=>`<div class="hint" style="margin-top:6px;">• ${esc(x)}</div>`).join('')}</div>`:''}`;
+}
+async function vRead(chId, li){
+  const s=session(); if(!s){ go('#/login'); return; }
+  const c=chById(chId); if(!c){ go('#/chapters'); return; }
+  let chd=null; try{ chd=await getChData(chId); }catch(e){ $('#app').innerHTML='<div class="alert alert-err">خطا در بارگذاری درس.</div>'; return; }
+  li=Math.max(0,Math.min(li,chd.lessons.length-1));
+  const l=chd.lessons[li], done=prog.is(chId,li);
+  setNav(s.role==='teacher'?TEACHER_NAV:STUDENT_NAV); setRoleBadge(s.role==='teacher'?'👨‍🏫 استاد':'👨‍🎓 '+s.name);
+  $('#topsub').textContent=c.label+' — '+l.label;
+  const prev=li>0?`#/read/${chId}/${li-1}`:null, nextL=li<chd.lessons.length-1?`#/read/${chId}/${li+1}`:null;
+  $('#app').innerHTML=`
+  <h2 class="ptitle">${esc(l.label)}: ${esc(l.title)}</h2>
+  <div class="hint" style="margin-bottom:8px;">${esc(c.label)} • درس ${fa(li+1)} از ${fa(chd.lessons.length)} • <a href="#/chapter/${chId}">فهرست درس‌ها</a></div>
+  <div class="reader">${l.html}</div>
+  ${s.role==='student'?`<button class="read-toggle ${done?'is-done':''}" onclick="toggleRead('${chId}',${li})">${done?'✓ خوانده شده — برای لغو بزنید':'☐ علامت‌گذاری به‌عنوان خوانده‌شده'}</button>`:''}
+  <div class="lesson-nav">
+    ${prev?`<a class="btn btn-outline" href="${prev}">→ درس قبلی</a>`:`<span></span>`}
+    ${nextL?`<a class="btn btn-green" href="${nextL}">درس بعدی ←</a>`:`<a class="btn btn-gold" href="#/quiz/${chId}">خودآزمایی فصل ←</a>`}
+  </div>`;
+  window.scrollTo(0,0);
+}
+function toggleRead(chId, li){ prog.set(chId, li, !prog.is(chId,li)); vRead(chId, li); }
+</script>
+<script>
+
+'use strict';
+/* ================= quiz ================= */
+function vQuiz(chId){
+  const s=requireRole('student'); if(!s) return;
+  const c=chById(chId); if(!c||!c.questions.length){ go('#/chapter/'+chId); return; }
+  setNav(STUDENT_NAV); setRoleBadge('👨‍🎓 '+s.name);
+  $('#topsub').textContent='خودآزمایی — '+c.label;
+  const saved=quizStore.get(chId);
+  const R=[['فهمیدم',2],['نیمه‌فهمیدم',1],['نفهمیدم',0]];
+  $('#app').innerHTML=`
+  <h2 class="ptitle">📝 خودآزمایی ${esc(c.label)}</h2>
+  <p class="hint">به هر پرسش صادقانه نمره بدهید و اگر خواستید پاسخ نوشتاری هم بنویسید. پاسخ‌های شما برای استاد ارسال می‌شود.</p>
+  ${c.questions.map((q,i)=>{
+    const a=saved&&saved.answers[i]?saved.answers[i]:{rating:'',text:''};
+    return `<div class="q-card">
+      <div class="q-text">${fa(i+1)}. ${esc(q)}</div>
+      <div class="rate-row">${R.map(([t,v])=>`<button class="rate ${String(a.rating)===String(v)?'sel-'+v:''}" data-q="${i}" data-v="${v}" onclick="setRate(this)">${t}</button>`).join('')}</div>
+      <textarea id="qa_${i}" placeholder="پاسخ نوشتاری (اختیاری)…">${esc(a.text||'')}</textarea>
+    </div>`;
+  }).join('')}
+  <button class="btn btn-green btn-block" onclick="submitQuiz('${chId}',${c.questions.length})">✅ ثبت خودآزمایی</button>
+  <div style="height:8px;"></div>
+  <a class="btn btn-outline btn-block" href="#/chapter/${chId}">بازگشت به فصل</a>`;
+  window.scrollTo(0,0);
+}
+function setRate(btn){
+  const q=btn.dataset.q;
+  document.querySelectorAll(`.rate[data-q="${q}"]`).forEach(b=>b.className='rate');
+  btn.classList.add('sel-'+btn.dataset.v);
+  btn.dataset.chosen=btn.dataset.v;
+}
+function submitQuiz(chId, n){
+  const answers=[];
+  for(let i=0;i<n;i++){
+    const btn=document.querySelector(`.rate[data-q="${i}"].sel-0,.rate[data-q="${i}"].sel-1,.rate[data-q="${i}"].sel-2`);
+    const rating=btn?btn.dataset.v:'';
+    const text=($('#qa_'+i)||{value:''}).value.trim();
+    const c=chById(chId);
+    answers.push({q:c.questions[i], rating, text});
+  }
+  if(!answers.some(a=>a.rating!==''||a.text)){ alert('حداقل به یک پرسش پاسخ بدهید.'); return; }
+  quizStore.set(chId, answers);
+  alert('✅ خودآزمایی ثبت شد. موفق باشید!');
+  go('#/chapter/'+chId);
+}
+
+/* ================= student dashboard ================= */
+function vSDash(){
+  const s=requireRole('student'); if(!s) return;
+  setNav(STUDENT_NAV); setRoleBadge('👨‍🎓 '+s.name);
+  $('#topsub').textContent='داشبورد شاگرد';
+  const pct=prog.overallPct(), R=52, C=2*Math.PI*R;
+  const chDoneN=CH_META.filter(c=>c.lessonCount&&prog.chDone(c.id)===c.lessonCount).length;
+  $('#app').innerHTML=`
+  <h2 class="ptitle">📊 داشبورد من</h2>
+  <div class="card" style="text-align:center;">
+    <div class="ring"><svg width="120" height="120"><circle cx="60" cy="60" r="${R}" stroke="#eee9db" stroke-width="11" fill="none"/><circle cx="60" cy="60" r="${R}" stroke="var(--gold-500)" stroke-width="11" fill="none" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${C*(1-pct/100)}"/></svg><div class="pct">${fa(pct)}٪</div></div>
+    <b>پیشرفت کلی مطالعه</b>
+  </div>
+  <div class="stat-grid">
+    <div class="stat"><b>${fa(prog.total())}/${fa(TOTAL_LESSONS)}</b><span>درس‌های خوانده‌شده</span></div>
+    <div class="stat"><b>${fa(chDoneN)}/${fa(CH_META.length)}</b><span>فصل‌های تمام‌شده</span></div>
+    <div class="stat"><b>${fa(quizStore.mastery())}٪</b><span>میانگین تسلط (خودارزیابی)</span></div>
+    <div class="stat"><b>${fa(streak())} روز</b><span>🔥 مطالعه متوالی</span></div>
+  </div>
+  <div class="card"><b style="font-size:14px;">پیشرفت فصل‌به‌فصل</b>
+    ${CH_META.map(c=>{const d=prog.chDone(c.id),n=c.lessonCount,p=n?Math.round(d/n*100):0;
+      return `<div style="margin-top:10px;"><div style="display:flex; justify-content:space-between; font-size:12.5px;"><span>${esc(c.label)}</span><b>${fa(p)}٪</b></div><div class="pbar green"><i style="width:${p}%"></i></div></div>`;}).join('')}
+  </div>`;
+}
+
+/* ================= ask & announcements ================= */
+function vAsk(){
+  const s=requireRole('student'); if(!s) return;
+  setNav(STUDENT_NAV); setRoleBadge('👨‍🎓 '+s.name);
+  $('#topsub').textContent='پرسش از استاد';
+  const mine=store.get('myQuestions',[]);
+  $('#app').innerHTML=`
+  <h2 class="ptitle">💬 پرسش از استاد</h2>
+  <div class="card">
+    <div class="field"><label>پرسش شما</label><textarea id="qText" placeholder="پرسش خود را درباره درس‌نامه بنویسید…"></textarea></div>
+    <button class="btn btn-green btn-block" onclick="sendQuestion()">📨 ارسال برای استاد</button>
+  </div>
+  <div class="card"><b style="font-size:14px;">پرسش‌های قبلی من</b>
+    ${mine.length? mine.slice().reverse().map(q=>`<div class="ans-item"><div style="font-size:13px;">${esc(q.text)}</div><div class="hint">${fmtDate(q.ts)}</div></div>`).join('') : `<div class="empty"><span class="big">💭</span>هنوز پرسشی نفرستاده‌اید.</div>`}
+  </div>`;
+}
+function sendQuestion(){
+  const t=$('#qText').value.trim();
+  if(!t){ alert('متن پرسش را بنویسید.'); return; }
+  const mine=store.get('myQuestions',[]); mine.push({text:t, ts:Date.now()}); store.set('myQuestions',mine);
+  queue({action:'ask', text:t});
+  $('#qText').value='';
+  alert('📨 پرسش شما ارسال شد.');
+  vAsk();
+}
+function vAnnounce(){
+  const s=session(); if(!s){ go('#/login'); return; }
+  setNav(s.role==='teacher'?TEACHER_NAV:STUDENT_NAV); setRoleBadge(s.role==='teacher'?'👨‍🏫 استاد':'👨‍🎓 '+s.name);
+  $('#topsub').textContent='اطلاعیه‌ها';
+  const cfg=settings();
+  $('#app').innerHTML=`<h2 class="ptitle">📢 اطلاعیه‌ها</h2><div id="annList"><div class="empty"><span class="big">⏳</span>در حال دریافت…</div></div>`;
+  if(!cfg.appsScriptUrl){ $('#annList').innerHTML=`<div class="alert alert-warn">همگام‌سازی تنظیم نشده است. اطلاعیه‌ها پس از اتصال سامانه به گوگل‌شیت نمایش داده می‌شوند.</div>`; return; }
+  apiGet({action:'announcements'}).then(j=>{
+    const list=(j.announcements||[]).filter(a=>a.text);
+    $('#annList').innerHTML=list.length? list.map(a=>`<div class="card"><div style="font-size:14px;">${esc(a.text)}</div><div class="hint">${fmtDate(a.ts)}</div></div>`).join('') : `<div class="empty"><span class="big">📢</span>هنوز اطلاعیه‌ای ثبت نشده است.</div>`;
+  }).catch(()=>{ $('#annList').innerHTML=`<div class="alert alert-err">خطا در دریافت اطلاعیه‌ها. اتصال اینترنت را بررسی کنید.</div>`; });
+}
+</script>
+<script>
+
+'use strict';
+/* ================= teacher dashboard ================= */
+let TD_CACHE=null;
+function vTDash(){
+  if(!requireRole('teacher')) return;
+  setNav(TEACHER_NAV); setRoleBadge('👨‍🏫 استاد');
+  $('#topsub').textContent='داشبورد استاد';
+  const cfg=settings();
+  $('#app').innerHTML=`<h2 class="ptitle">📊 داشبورد استاد</h2><div id="tdBody"><div class="empty"><span class="big">⏳</span>در حال دریافت داده‌ها…</div></div>`;
+  if(!cfg.appsScriptUrl){
+    $('#tdBody').innerHTML=`<div class="alert alert-warn">⚠️ <b>همگام‌سازی تنظیم نشده است.</b><br>برای دیدن پیشرفت شاگردان، ابتدا طبق راهنما وب‌اپ Apps Script را بسازید و آدرس آن را در <a href="#/settings">تنظیمات</a> وارد کنید.</div>
+    <div class="card"><b>فهرست فصل‌های کتاب</b><div class="hint">می‌توانید متن درس‌ها را از بخش «فصل‌ها» مرور کنید.</div><a class="btn btn-outline btn-block" style="margin-top:8px;" href="#/chapters">📚 مشاهده فصل‌ها</a></div>`;
+    return;
+  }
+  apiGet({action:'dashboard', password:cfg.teacherPass}).then(j=>{
+    if(!j.ok){ $('#tdBody').innerHTML=`<div class="alert alert-err">خطا: ${esc(j.error==='auth'?'گذرواژه با شیت هم‌خوانی ندارد.':'عدم دسترسی')}<br>گذرواژه را در <a href="#/settings">تنظیمات</a> بررسی کنید.</div>`; return; }
+    TD_CACHE=j.data; renderTDash(j.data);
+  }).catch(()=>{ $('#tdBody').innerHTML=`<div class="alert alert-err">خطا در اتصال به گوگل‌شیت. اینترنت یا آدرس وب‌اپ را بررسی کنید.</div>`; });
+}
+function studentStats(d){
+  // per student: lessons read set, quiz count, mastery, last active
+  const map={};
+  d.students.forEach(st=>{ map[st.studentId]={name:st.name, lastActive:st.lastActive, lessons:new Set(), quizzes:0, rSum:0, rN:0}; });
+  d.progress.forEach(p=>{ const m=map[p.studentId]; if(m&&p.done) m.lessons.add(p.chapterId+':'+p.lessonIdx); });
+  d.quiz.forEach(q=>{ const m=map[q.studentId]; if(!m) return; m.quizzes++; const r=parseInt(q.rating); if(!isNaN(r)){ m.rSum+=r; m.rN++; } });
+  return Object.entries(map).map(([id,m])=>({id, name:m.name, lastActive:m.lastActive,
+    pct:Math.round(m.lessons.size/TOTAL_LESSONS*100), quizzes:m.quizzes,
+    mastery:m.rN?Math.round(m.rSum/m.rN/2*100):null}));
+}
+function renderTDash(d){
+  const stats=studentStats(d);
+  const avgP=stats.length?Math.round(stats.reduce((a,s)=>a+s.pct,0)/stats.length):0;
+  const mst=stats.filter(s=>s.mastery!=null);
+  const avgM=mst.length?Math.round(mst.reduce((a,s)=>a+s.mastery,0)/mst.length):0;
+  const weekAgo=Date.now()-7*864e5;
+  const active7=stats.filter(s=>s.lastActive&&new Date(s.lastActive).getTime()>weekAgo).length;
+  const openQ=d.questions.filter(q=>!q.answered).length;
+  $('#tdBody').innerHTML=`
+  <div class="stat-grid">
+    <div class="stat"><b>${fa(stats.length)}</b><span>👨‍🎓 شاگردان</span></div>
+    <div class="stat"><b>${fa(avgP)}٪</b><span>میانگین پیشرفت</span></div>
+    <div class="stat"><b>${fa(avgM)}٪</b><span>میانگین تسلط</span></div>
+    <div class="stat"><b>${fa(active7)}</b><span>🔥 فعال ۷ روز اخیر</span></div>
+  </div>
+  ${openQ?`<a href="#/tquestions" class="alert alert-warn" style="display:block; text-decoration:none;">💬 ${fa(openQ)} پرسش بی‌پاسخ از شاگردان — مشاهده</a>`:''}
+  <div class="card"><b style="font-size:14px;">شاگردان کلاس</b>
+  ${stats.length? stats.sort((a,b)=>b.pct-a.pct).map(s=>`
+    <a class="st-row" href="#/student/${s.id}">
+      <div class="st-avatar">${esc(s.name.trim()[0]||'؟')}</div>
+      <div class="nm"><b>${esc(s.name)}</b><small>${fa(s.quizzes)} خودآزمایی • ${s.lastActive?'آخرین فعالیت: '+fmtDate(s.lastActive):'بدون فعالیت'}</small>
+        <div class="pbar green" style="margin-top:6px;"><i style="width:${s.pct}%"></i></div></div>
+      <b style="font-size:14px; color:var(--green-800);">${fa(s.pct)}٪</b>
+    </a>`).join('') : `<div class="empty"><span class="big">👨‍🎓</span>هنوز شاگردی ثبت‌نام نکرده است.<br><span class="hint">کد کلاس: <b>${esc(settings().classCode)}</b> را به شاگردان بدهید.</span></div>`}
+  </div>
+  <button class="btn btn-outline btn-block btn-sm" onclick="TD_CACHE=null; vTDash()">🔄 به‌روزرسانی داده‌ها</button>`;
+}
+function vStudentDetail(sid){
+  if(!requireRole('teacher')) return;
+  setNav(TEACHER_NAV); setRoleBadge('👨‍🏫 استاد');
+  const d=TD_CACHE; const st=d&&d.students.find(x=>x.studentId===sid);
+  $('#topsub').textContent='جزئیات شاگرد';
+  if(!d||!st){ $('#app').innerHTML=`<div class="alert alert-warn">داده یافت نشد. <a href="#/tdash">بازگشت به داشبورد</a></div>`; return; }
+  const doneSet=new Set(d.progress.filter(p=>p.studentId===sid&&p.done).map(p=>p.chapterId+':'+p.lessonIdx));
+  const quizzes=d.quiz.filter(q=>q.studentId===sid);
+  const byCh={}; quizzes.forEach(q=>{ (byCh[q.chapterId]=byCh[q.chapterId]||[]).push(q); });
+  const RNAME={'2':'فهمیدم','1':'نیمه‌فهمیدم','0':'نفهمیدم'};
+  $('#app').innerHTML=`
+  <h2 class="ptitle">👨‍🎓 ${esc(st.name)}</h2>
+  <div class="card"><div class="hint">ثبت‌نام: ${fmtDate(st.registeredAt)} • آخرین فعالیت: ${st.lastActive?fmtDate(st.lastActive):'—'}</div></div>
+  <div class="card"><b style="font-size:14px;">پیشرفت فصل‌به‌فصل</b>
+    ${CH_META.map(c=>{let n=0; for(let i=0;i<c.lessonCount;i++){ if(doneSet.has(c.id+':'+i)) n++; } const p=c.lessonCount?Math.round(n/c.lessonCount*100):0;
+      return `<div style="margin-top:8px;"><div style="display:flex;justify-content:space-between;font-size:12.5px;"><span>${esc(c.label)}</span><b>${fa(p)}٪</b></div><div class="pbar green"><i style="width:${p}%"></i></div></div>`;}).join('')}
+  </div>
+  <div class="card"><b style="font-size:14px;">📝 پاسخ‌های خودآزمایی (${fa(quizzes.length)})</b>
+    ${Object.keys(byCh).length? Object.entries(byCh).map(([chId,qs])=>{ const c=chById(chId);
+      return `<div style="margin-top:12px;"><b style="font-size:13px; color:var(--green-800);">${esc(c?c.label:chId)}</b>${qs.map(q=>`
+        <div class="ans-item"><div class="qq">${esc(q.question)}</div>
+        <span class="pill ${q.rating==='2'?'pill-ok':q.rating==='1'?'pill-warn':'pill-bad'}">${RNAME[q.rating]||'بدون نمره'}</span>
+        ${q.answer?`<div class="aa">${esc(q.answer)}</div>`:''}</div>`).join('')}</div>`;}).join('') : `<div class="empty">هنوز خودآزمایی ثبت نشده.</div>`}
+  </div>
+  <a class="btn btn-outline btn-block" href="#/tdash">بازگشت به داشبورد</a>`;
+}
+function vTQuestions(){
+  if(!requireRole('teacher')) return;
+  setNav(TEACHER_NAV); setRoleBadge('👨‍🏫 استاد');
+  $('#topsub').textContent='پرسش‌های شاگردان';
+  const d=TD_CACHE;
+  const render=(list)=>{
+    const open=list.filter(q=>!q.answered), done=list.filter(q=>q.answered);
+    $('#app').innerHTML=`<h2 class="ptitle">💬 پرسش‌های شاگردان</h2>
+    <b style="font-size:14px;">بی‌پاسخ (${fa(open.length)})</b>
+    ${open.length? open.map((q,i)=>`<div class="ans-item"><b style="font-size:13px;">${esc(q.name)}</b> <span class="hint">${fmtDate(q.ts)}</span><div style="margin-top:6px;">${esc(q.text)}</div><button class="btn btn-green btn-sm" style="margin-top:8px;" onclick="markAnswered(${list.indexOf(q)})">✓ پاسخ داده شد</button></div>`).join('') : `<div class="empty"><span class="big">✅</span>پرسش بی‌پاسخی نیست.</div>`}
+    ${done.length?`<b style="font-size:14px; display:block; margin-top:14px;">پاسخ‌داده‌شده (${fa(done.length)})</b>`+done.map(q=>`<div class="ans-item" style="opacity:.7;"><b style="font-size:13px;">${esc(q.name)}</b><div style="margin-top:4px;">${esc(q.text)}</div></div>`).join(''):''}`;
+  };
+  if(d){ render(d.questions); return; }
+  const cfg=settings();
+  $('#app').innerHTML=`<h2 class="ptitle">💬 پرسش‌های شاگردان</h2><div class="empty"><span class="big">⏳</span>در حال دریافت…</div>`;
+  if(!cfg.appsScriptUrl){ $('#app').innerHTML=`<div class="alert alert-warn">همگام‌سازی تنظیم نشده است. <a href="#/settings">تنظیمات</a></div>`; return; }
+  apiGet({action:'dashboard', password:cfg.teacherPass}).then(j=>{ if(j.ok){ TD_CACHE=j.data; render(j.data.questions); } }).catch(()=>{});
+}
+function markAnswered(idx){
+  const q=TD_CACHE.questions[idx]; if(!q) return;
+  sendPayload(settings().appsScriptUrl,{action:'markAnswered', studentId:q.studentId, ts:(q.ts instanceof Date?q.ts.getTime():new Date(q.ts).getTime())})
+    .then(()=>{ TD_CACHE.questions[idx].answered=true; vTQuestions(); })
+    .catch(()=>alert('خطا در ثبت. دوباره تلاش کنید.'));
+}
+
+/* ================= settings ================= */
+function vSettings(){
+  if(!requireRole('teacher')) return;
+  setNav(TEACHER_NAV); setRoleBadge('👨‍🏫 استاد');
+  $('#topsub').textContent='تنظیمات';
+  const cfg=settings();
+  $('#app').innerHTML=`
+  <h2 class="ptitle">⚙️ تنظیمات سامانه</h2>
+  <div class="card">
+    <div class="field"><label>آدرس وب‌اپ Apps Script (ختم‌شونده به /exec)</label><input id="setUrl" dir="ltr" placeholder="https://script.google.com/macros/s/.../exec" value="${esc(cfg.appsScriptUrl)}"></div>
+    <div class="field"><label>کد کلاس (ورود شاگردان)</label><input id="setCode" value="${esc(cfg.classCode)}"></div>
+    <div class="field"><label>گذرواژه استاد</label><input id="setPass" value="${esc(cfg.teacherPass)}"><p class="hint">این گذرواژه باید با مقدار <code>teacherPassword</code> در شیت Config یکسان باشد.</p></div>
+    <button class="btn btn-green btn-block" onclick="saveCfg()">💾 ذخیره تنظیمات</button>
+  </div>
+  <div class="card"><b style="font-size:14px;">📤 پشتیبان‌گیری</b><p class="hint">داده‌های شاگردان در گوگل‌شیت شماست. برای پشتیبان: در شیت، File ← Download ← Microsoft Excel.</p></div>
+  <details class="help"><summary>📖 راهنمای راه‌اندازی گوگل‌شیت</summary><ol class="setup-steps">
+    <li>یک گوگل‌شیت تازه بسازید.</li>
+    <li>منوی Extensions ← Apps Script ← کد <code>lms_apps_script.js</code> را بچسبانید و ذخیره کنید.</li>
+    <li>تابع <code>setup</code> را یک بار اجرا کنید و اجازه بدهید.</li>
+    <li>در شیت Config گذرواژه و کد کلاس را تنظیم کنید.</li>
+    <li>Deploy ← New deployment ← Web app ← Execute as: Me ← Who has access: Anyone ← Deploy</li>
+    <li>آدرس /exec را کپی و در همین صفحه وارد کنید.</li>
+  </ol></details>`;
+}
+function saveCfg(){
+  saveSettings({appsScriptUrl:$('#setUrl').value.trim(), classCode:$('#setCode').value.trim()||'QAEM1404', teacherPass:$('#setPass').value||'1234'});
+  TD_CACHE=null; alert('✅ ذخیره شد.'); flushQueue();
+}
+
+/* ================= router ================= */
+async function router(){
+  if(!CH_META.length) return;
+  const hsh=location.hash||'#/login';
+  const s=session();
+  const parts=hsh.replace('#/','').split('/');
+  $('#app').className='page';
+  try{
+    if(hsh.startsWith('#/login')) return vLogin();
+    if(!s) return vLogin();
+    switch(parts[0]){
+      case 'home': return await vHome();
+      case 'chapters': return vChapters();
+      case 'chapter': return await vChapter(parts[1]);
+      case 'read': return await vRead(parts[1], parseInt(parts[2]||'0'));
+      case 'quiz': return vQuiz(parts[1]);
+      case 'sdash': return vSDash();
+      case 'ask': return vAsk();
+      case 'announce': return vAnnounce();
+      case 'tdash': return vTDash();
+      case 'student': return vStudentDetail(parts[1]);
+      case 'tquestions': return vTQuestions();
+      case 'settings': return vSettings();
+      default: return s.role==='teacher'? go('#/tdash') : go('#/home');
+    }
+  }catch(e){ console.error(e); }
+}
+window.addEventListener('hashchange', router);
+document.addEventListener('DOMContentLoaded', ()=>{
+  $('#app').innerHTML='<div class="empty"><span class="big">⏳</span>در حال بارگذاری محتوای کتاب…</div>';
+  fetch('content/index.json').then(r=>{ if(!r.ok) throw new Error('nf'); return r.json(); }).then(idx=>{
+    CH_META=idx.chapters; TOTAL_LESSONS=idx.totalLessons;
+    if(!location.hash) location.hash = session()? (session().role==='teacher'?'#/tdash':'#/home') : '#/login';
+    router(); flushQueue();
+  }).catch(()=>{ $('#app').innerHTML='<div class="alert alert-err" style="margin-top:20px;">خطا در بارگذاری محتوای کتاب.<br>اتصال اینترنت را بررسی و صفحه را رفرش کنید.</div>'; });
+});
+</script>
+</body>
+</html>
